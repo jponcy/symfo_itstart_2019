@@ -37,7 +37,7 @@ class StudentController extends Controller
     }
 
     /**
-     * @Route("fill")
+     * @Route("student/fill")
      */
     public function fillAction()
     {
