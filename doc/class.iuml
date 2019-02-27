@@ -1,0 +1,21 @@
+@startuml classes
+class Book {
+    - id: int {autoincrement, readOnly}
+    - name: string {unique}
+    - description: string
+    - price: float
+    - stock: int
+    - author: string
+}
+
+note as consign
+    1) faire l'entité
+    2) faire le repository
+    3) faire le controller avec une action index donnant :
+      - le nom d'un livre
+      - son prix
+      - son stock
+endnote
+
+consign -> Book
+@enduml

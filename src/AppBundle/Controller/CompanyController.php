@@ -15,14 +15,28 @@ class CompanyController extends Controller
     {
         $repo = $this->getDoctrine()->getManager()->getRepository(Company::class);
         $entities = $repo->findAll();
+$v = [1, 2, 3];
+$v['value'] = 'DEZ';
+array_push($v, 42);
+        return $this->render('company/index.html.twig', [
+            'msg' => 'Salut !',
+            'entities' => $entities,
+            'nb' => count($entities),
+            'values' => $v
+        ]);
+    }
 
-        dump($entities);
+    /**
+     * @Route("company/{id}/show")
+     */
+    public function showAction(int $id)
+    {
+        $repo = $this->getDoctrine()->getRepository(Company::class);
+        $company = $repo->find($id);
 
-        $content = '<html><body>';
-        $content.= count($entities) . ' compan' . (count($entities) > 1 ? 'ies' : 'y');
-        $content.= '</body></html>';
-
-        return new Response($content);
+        return $this->render('company/show.html.twig', [
+            'entity' => $company
+        ]);
     }
 
 //     /**
