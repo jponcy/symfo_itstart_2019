@@ -152,8 +152,8 @@ class BookController extends Controller
      */
     public function deleteAction(Book $book)
     {
-//         $this->manager()->remove($book);
-//         $this->manager()->flush();
+        $this->manager()->remove($book);
+        $this->manager()->flush();
 
         $this->addFlash('success', 'Suppression réussie');
 
