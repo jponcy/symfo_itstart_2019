@@ -132,7 +132,7 @@ class BookController extends Controller
         // Verification si sauvegarde.
         if ($fb->isSubmitted() && $fb->isValid()) {
             // Sauvegarde.
-            $manager = $this->getDoctrine()->getManager();
+            $manager = $this->manager();
             $manager->persist($book);
             $manager->flush();
 
@@ -145,4 +145,21 @@ class BookController extends Controller
             'form' => $fb->createView()
         ]);
     }
+
+    /**
+     * @Route("book/{id}/delete")
+     * @param Book $book
+     */
+    public function deleteAction(Book $book)
+    {
+//         $this->manager()->remove($book);
+//         $this->manager()->flush();
+
+        $this->addFlash('success', 'Suppression réussie');
+
+        return $this->redirectToRoute('app_book_index');
+    }
+
+    protected function manager()
+    { return $this->getDoctrine()->getManager(); }
 }

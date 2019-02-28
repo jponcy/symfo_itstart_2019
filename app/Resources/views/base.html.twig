@@ -12,6 +12,9 @@
 >
 
 <style>
+tr td:last-child {
+    width: 50px;
+}
 h1 {
   text-align: center;
   color: blue;
@@ -28,10 +31,31 @@ tr.low-stock {
 tr.no-stock {
   background-color: red;
 }
+tbody tr:hover .btn-primary {
+    background-color: white;
+    color: black;
+}
+tbody tr:hover {
+    background-color: black;
+    color: white;
+}
 
 .errors {
   color: red;
   font-weight: bold;
+}
+
+.flash-notice {
+  border: 1px solid silver;
+  margin: 25px;
+  margin: auto;
+  padding: 25px;
+  border-radius: 25px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  background-color: #0F0;
+  background-color: rgba(0, 250, 0, 0.4);
+  font-size: 1.2em;
 }
 </style>
 {% endblock %}
@@ -43,16 +67,58 @@ tr.no-stock {
 </head>
 <body>
   <div class="container-fluid">
+    {% block flashes %}
+    {% for message in app.flashes('success') %}
+    <div
+      class="flashes alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endblock %}
+
     {% block body %}
     Insert content
     {% endblock %}
   </div>
   {% block javascripts %}
   <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"
+  ></script>
+  <script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"
   ></script>
+
+  <script>
+  (function () {
+      // Manage danger buttons.
+      document.querySelectorAll('.btn-danger').forEach(elt => elt.addEventListener('click', event => {
+          var choice = window.confirm('Êtes-vous sûr ?');
+
+          if (!choice) {
+              event.preventDefault();
+          }
+
+          return choice;
+      }));
+
+      // Dispose flashes messages.
+      setTimeout(_ => $('.flashes.alert').alert('close'), 4000);
+  })();
+  </script>
   {% endblock %}
 </body>
 </html>
