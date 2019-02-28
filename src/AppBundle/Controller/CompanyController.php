@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Company;
-use Symfony\Component\HttpFoundation\Response;
 
 class CompanyController extends Controller
 {
@@ -15,6 +14,7 @@ class CompanyController extends Controller
     {
         $repo = $this->getDoctrine()->getManager()->getRepository(Company::class);
         $entities = $repo->findAll();
+
 $v = [1, 2, 3];
 $v['value'] = 'DEZ';
 array_push($v, 42);

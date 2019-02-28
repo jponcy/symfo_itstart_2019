@@ -15,6 +15,13 @@ note as consign
       - le nom d'un livre
       - son prix
       - son stock
+    4) dans l'index, nous afficherons une couleur de fond pour chaque ligne
+       suivant les stocks : disponibles
+      - >= 10 en vert
+      - < 10 en orange
+      - 0 en rouge
+    5) rajouter une vue "détails" (show)
+    6) dans la page index, faire en sorte que le clique sur le nom d'un livre affiche la vue détaillée
 endnote
 
 consign -> Book
