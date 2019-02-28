@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass = "AppBundle\Repository\BookRepository")
@@ -14,36 +15,59 @@ class Book
      * @ORM\Id()
      * @ORM\Column(type = "integer")
      * @ORM\GeneratedValue(strategy = "AUTO")
+     *
      * @var integer
      */
     private $id;
 
     /**
      * @ORM\Column(type = "string", unique = true)
+     *
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 3, max = 255)
+     *
      * @var string
      */
     private $name;
 
     /**
      * @ORM\Column(type = "text")
+     *
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     *
      * @var string
      */
     private $description;
 
     /**
      * @ORM\Column(type = "float")
+     *
+     * @Assert\NotNull()
+     * @Assert\Range(min = 1, max = 12000)
+     *
      * @var float
      */
     private $price;
 
     /**
      * @ORM\Column(type = "integer")
+     *
+     * @Assert\NotNull()
+     * @Assert\Range(min = 0)
+     *
      * @var integer
      */
     private $stock;
 
     /**
      * @ORM\Column(type = "string")
+     *
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     * @Assert\Length(max = 255)
+     *
      * @var string
      */
     private $author;

@@ -8,6 +8,8 @@ use AppBundle\Entity\Book;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use AppBundle\Form\BookType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BookController extends Controller
 {
@@ -109,6 +111,38 @@ class BookController extends Controller
             'request' => $request,
             'book' => $book,
             'errors' => $errors
+        ]);
+    } // ! create.
+
+    /**
+     * @Route("book/{id}/edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Book $book, Request $request)
+    {
+        // Creation du formulaire.
+        $fb = $this->createForm(BookType::class, $book);
+
+        // Ajout du bouton submit (ne doit pas etre present dans la class BookType)
+        $fb->add('submit', SubmitType::class, ['label' => 'Modifier']);
+
+        // Mise a jour du modele par rapport aux parametres presents dans Request.
+        $fb->handleRequest($request);
+
+        // Verification si sauvegarde.
+        if ($fb->isSubmitted() && $fb->isValid()) {
+            // Sauvegarde.
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($book);
+            $manager->flush();
+
+            // Redirection vers la liste des livres.
+            return $this->redirectToRoute('app_book_index');
+        }
+
+        // Si le formulaire n'a pas encore ete envoye par l'utilisateur ou qu'il y a des erreurs.
+        return $this->render('book/edit.html.twig', [
+            'form' => $fb->createView()
         ]);
     }
 }

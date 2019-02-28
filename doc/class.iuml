@@ -1,28 +1,46 @@
-@startuml classes
-class Book {
-    - id: int {autoincrement, readOnly}
-    - name: string {unique}
-    - description: string
-    - price: float
-    - stock: int
-    - author: string
+@startuml author
+' class Book {
+'     - id: int {autoincrement, readOnly} <<PK>>
+'     - name: string {unique}
+'     - description: string
+'     - price: float
+'     - stock: int
+'     - author: string
+' }
+
+' note as consign
+'     1) faire l'entité
+'     2) faire le repository
+'     3) faire le controller avec une action index donnant :
+'       - le nom d'un livre
+'       - son prix
+'       - son stock
+'     4) dans l'index, nous afficherons une couleur de fond pour chaque ligne
+'        suivant les stocks : disponibles
+'       - >= 10 en vert
+'       - < 10 en orange
+'       - 0 en rouge
+'     5) rajouter une vue "détails" (show)
+'     6) dans la page index, faire en sorte que le clique sur le nom d'un livre affiche la vue détaillée
+' endnote
+
+' consign -> Book
+
+class Author {
+    - id[1]: int {readOnly, Autoincrement, PK}
+    - createdAt: DateTime
+    - updatedAt: DateTime
+    - lastname[1]: string
+    - firstname[1]: string
+    - surname[0..1]: string
+    - birthdate[1]: Date
+    - birthplace[0..1]: string
 }
 
-note as consign
-    1) faire l'entité
-    2) faire le repository
-    3) faire le controller avec une action index donnant :
-      - le nom d'un livre
-      - son prix
-      - son stock
-    4) dans l'index, nous afficherons une couleur de fond pour chaque ligne
-       suivant les stocks : disponibles
-      - >= 10 en vert
-      - < 10 en orange
-      - 0 en rouge
-    5) rajouter une vue "détails" (show)
-    6) dans la page index, faire en sorte que le clique sur le nom d'un livre affiche la vue détaillée
+note as AuthorConsigne
+1) Coder l'entité
+2) Un CRUD de base
 endnote
 
-consign -> Book
+AuthorConsigne -> Author
 @enduml

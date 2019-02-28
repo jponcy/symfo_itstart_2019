@@ -20,16 +20,18 @@ h1 {
 tr.high-stock {
   background-color: lime;
 }
+
 tr.low-stock {
   background-color: orange;
 }
+
 tr.no-stock {
   background-color: red;
 }
 
 .errors {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 </style>
 {% endblock %}
@@ -40,9 +42,11 @@ tr.no-stock {
 />
 </head>
 <body>
-  {% block body %}
-  Insert content
-  {% endblock %}
+  <div class="container-fluid">
+    {% block body %}
+    Insert content
+    {% endblock %}
+  </div>
   {% block javascripts %}
   <script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"

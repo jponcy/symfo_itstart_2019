@@ -15,4 +15,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-/doc/out/
+/doc/
+!/doc/*.iuml

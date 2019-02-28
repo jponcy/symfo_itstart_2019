@@ -35,6 +35,10 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: 
+# see : https://symfony.com/blog/new-in-symfony-3-4-bootstrap-4-form-theme
+#        - 'bootstrap_4_layout.html.twig'
+        - 'bootstrap_4_horizontal_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:
