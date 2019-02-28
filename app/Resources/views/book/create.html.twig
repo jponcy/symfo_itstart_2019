@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% macro error(field, errors) %}
+{% if errors and errors[field] is defined %}
+<p class="errors">
+  {{ errors[field] }}
+</p>
+{% endif %}
+{% endmacro error %}
+{% import 'book/create.html.twig' as _self %}
+
+{% block body %}
+<h1>Enregistrement d'un nouveau livre</h1>
+
+{# {% if errors %} <dl class="errors"> {% for field, errorMessage in errors %} <dt> {{ field }}</dt> <dd> {{
+errorMessage }}</dd> {% endfor %} </dl> {% endif %} #}
+
+<form method="POST">
+
+  {{ _self.error('name', errors) }}
+  <label>Nom<input
+    type="text"
+    name="name"
+    id="name"
+    value="{{ book.name | default('') }}"
+  /></label> <br>
+
+  {{ _self.error('price', errors) }}
+  <label>Price<input
+    type="number"
+    name="price"
+    id="price"
+    value="{{ book.price | default('') }}"
+  /></label><br>
+
+  {% if errors and errors.stock is defined %}
+  <p class="errors">
+    {{ errors.stock }}
+  </p>
+  {% endif %}
+  <label>Stock<input
+    type="number"
+    name="stock"
+    id=""
+    value="{{ book.stock | default('') }}"
+  /></label><br>
+
+  {% if errors and errors.author is defined %}
+  <p class="errors">
+    {{ errors.author }}
+  </p>
+  {% endif %}
+  <label>Auteur<input
+    type="text"
+    name="author"
+    id=""
+    value="{{ book.author | default('') }}"
+  /></label><br>
+
+  {% if errors and errors.description is defined %}
+  <p class="errors">
+    {{ errors.description }}
+  </p>
+  {% endif %}
+  <label>Description<textarea
+      name="description"
+      id="description"
+      cols="30"
+      rows="10"
+    >{{ book.description | default('') }}</textarea></label><br> <input
+    type="submit"
+    value="Enregistrer"
+  />
+</form>
+{% endblock %}
+
