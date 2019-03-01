@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Fiche de {{ entity.surname }}</h1>
+
+<dl>
+  <dt> Créé le </dt>   <dd>  {{ entity.createdAt|date }}</dd>
+  <dt> Mis-à-jour le </dt>   <dd>  {{ entity.updatedAt|date }}</dd>
+  <dt> Nom</dt>   <dd>  {{ entity.lastname }}</dd>
+  <dt> Prénom</dt>   <dd>  {{ entity.firstname }}</dd>
+  <dt> Né</dt>   <dd>  le {{ entity.birthdate|date }} {% if entity.birthplace %} à {{entity.birthplace }}{% endif %}</dd>
+</dl>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ form_start(form) }}
+{# <form method="{{ form.method }}" action="{{ form.action }}"> Solution la plus performante. #}
+
+{{ form_rest(form) }}
+
+<input
+  type="submit"
+  value="Send"
+/>
+{{ form_end(form) }}
+{% endblock body %}
